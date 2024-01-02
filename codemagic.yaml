@@ -44,10 +44,7 @@ workflows:
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles
-      # flutter/app stuff
-      - name: Set up code signing settings on Xcode project
-        script: |
-          xcode-project use-profiles
+     # flutter/app stuff
       - name: Get Flutter packages
         script: |
           flutter packages pub get
@@ -77,18 +74,10 @@ workflows:
       # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
       email:
         recipients:
-          - user_1@example.com
-          - user_2@example.com
+          - chris_anderson@micromentor.org
         notify:
           success: true # To receive a notification when a build succeeds
-          failure: false # To not receive a notification when a build fails
-      slack:
-        # See the following link about how to connect your Slack account - https://docs.codemagic.io/publishing-yaml/distribution/#slack
-        channel: "#builds"
-        notify_on_build_start: true # To receive a notification when a build starts
-        notify:
-          success: true # To receive a notification when a build succeeds
-          failure: false # To not receive a notification when a build fails
+          failure: true # To not receive a notification when a build fails
       # app_store_connect:
       #   auth: integration
 
@@ -102,31 +91,3 @@ workflows:
       #   # Configuration related to App Store (optional)
       #   # Note: This action is performed during post-processing.
       #   submit_to_app_store: false
-
-  web-workflow:
-    name: Web app workflow
-    max_build_duration: 10
-    environment:
-      flutter: stable
-    scripts:
-      - name: Get Flutter packages
-        script: |
-          flutter packages pub get
-      - name: Flutter analyze
-        script: |
-          flutter analyze
-      - name: Flutter unit tests
-        script: |
-          flutter test
-      - name: Flutter build webapp
-        script: |
-          flutter build web --release
-          cd build/web
-          7z a -r ../web.zip ./*
-    artifacts:
-      - build/web.zip
-      - flutter_drive.log
-    publishing:
-      email:
-        recipients:
-          - user_1@example.com
