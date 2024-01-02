@@ -4,6 +4,10 @@ We use Flutter to build our mobile apps. This draws from 2 sample CodeMagic conf
 1. [Flutter app building for iOS and Android](https://github.com/codemagic-ci-cd/codemagic-sample-projects/tree/main/flutter/flutter-android-and-ios-yaml-demo-project)
 2. [iOS manual code signing for a native iOS app](https://github.com/codemagic-ci-cd/codemagic-sample-projects/tree/main/ios/ios-manual-code-signing-demo-project)
 
+The second iOS manual code signing flow has partially been adapted into this project while debugging issues with manual signing the Flutter app, but it might not actually be useful here. 
+
+The rest of this README is from the Flutter iOS and Android project.
+
 # Flutter sample project to build Android and iOS app
 
 This sample project illustrates all of the necessary steps to successfully build and publish a Flutter Android and iOS apps with Codemagic. It covers the basic steps such as build versioning, code signing and publishing.
