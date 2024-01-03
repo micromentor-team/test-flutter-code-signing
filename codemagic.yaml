@@ -17,34 +17,9 @@ workflows:
       xcode: 15.2 # <-- set to specific version e.g. 14.3, 15.0 to avoid unexpected updates.
       cocoapods: 1.14.3
     scripts:
-      # xcode build settings for manual signing
-      - name: Initialize keychain to be used for codesigning using Codemagic CLI 'keychain' command
-        script: |
-          keychain initialize
-      - name: set up provisioning profiles
-        script: |
-          PROFILES_HOME="$HOME/Library/MobileDevice/Provisioning Profiles"
-          mkdir -p "$PROFILES_HOME"
-          PROFILE_PATH="$(mktemp "$PROFILES_HOME"/$(uuidgen).mobileprovision)"
-          echo ${CM_PROVISIONING_PROFILE} | base64 --decode > "$PROFILE_PATH"
-          echo "Saved provisioning profile $PROFILE_PATH"
-      - name: Add signing certificate to keychain
-        script: |
-          echo $CM_CERTIFICATE | base64 --decode > /tmp/certificate.p12
-          keychain add-certificates --certificate /tmp/certificate.p12 --certificate-password $CM_CERTIFICATE_PASSWORD
-      # - name: Increment build number
-      #   script: |
-      #     # increment build number
-      #     #!/bin/sh
-      #     set -e
-      #     set -x
-      #     cd $FCI_BUILD_DIR
-      #     # agvtool new-version -all $(($BUILD_NUMBER +1))
-      #     agvtool new-version -all $(($(app-store-connect get-latest-testflight-build-number "$APP_STORE_APPLE_ID") + 1))
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles
-     # flutter/app stuff
       - name: Get Flutter packages
         script: |
           flutter packages pub get
