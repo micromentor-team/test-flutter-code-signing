@@ -65,11 +65,12 @@ workflows:
           flutter build ipa --release \
             --build-name=1.0.0 \
             --build-number=9 \
-            --export-options-plist= ios/export_options.plist
+            --export-options-plist= ios/export.plist
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
       - flutter_drive.log
+      - ios/export.plist
     publishing:
       # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
       email:
