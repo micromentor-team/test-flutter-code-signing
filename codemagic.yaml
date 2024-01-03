@@ -7,7 +7,7 @@ workflows:
     #   app_store_connect: codemagic
     environment:
       groups:
-        - manual_code_signing_ios
+        - manual_code_signing_ios_debug
       ios_signing:
         distribution_type: ad_hoc
         bundle_identifier: org.micromentor.mmFlutterApp
@@ -37,7 +37,7 @@ workflows:
         # (temp) set build number to 9, the latest in the MM app store is 8
         # TODO: set up automatic versioning, or use env vars for manual versioning
         script: |
-          flutter build ipa --release \
+          flutter build ipa --debug \
             --build-name=1.0.0 \
             --build-number=9 \
             --export-options-plist=/Users/builder/export_options.plist
